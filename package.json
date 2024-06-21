@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start": "vite ./src",
-    "build": "vite build ./src"
+    "build": "vite build ./src --outDir ../dist"
   },
   "author": "Andrew Blakey",
   "license": "MIT",
