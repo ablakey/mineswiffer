@@ -45,6 +45,7 @@ html {
   }
 
   & > div {
+    cursor: pointer;
     display: flex;
     font-weight: bold;
     justify-content: center;
