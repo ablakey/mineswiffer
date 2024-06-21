@@ -1,0 +1,42 @@
+{
+  "name": "RENAME_ME",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "vite ./src",
+    "build": "vite build ./src"
+  },
+  "author": "Andrew Blakey",
+  "license": "MIT",
+  "prettier": {
+    "printWidth": 100
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "extends": [
+      "plugin:@typescript-eslint/recommended",
+      "prettier"
+    ],
+    "rules": {
+      "@typescript-eslint/no-empty-function": "off",
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/no-non-null-assertion": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-angle-bracket-type-assertion": "off",
+      "@typescript-eslint/prefer-interface": "off"
+    }
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.7.0",
+    "@typescript-eslint/parser": "^7.7.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.9"
+  }
+}

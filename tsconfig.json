@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "target": "es2015",
+      "module": "ES2015",
+      "lib": ["DOM", "ES2017"],
+      "strict": true,
+      "moduleResolution": "Node",
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "jsx": "react-jsx"
+    },
+    "$schema": "https://json.schemastore.org/tsconfig",
+  }
