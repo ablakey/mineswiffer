@@ -1,3 +1,5 @@
-# mineswiffer
+# Mineswiffer
 
-Boilerplate.
+A Minesweeper MVP speedrun.
+
+https://mineswiffer.pointless.click
