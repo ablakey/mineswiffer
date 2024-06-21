@@ -90,8 +90,8 @@ export class Game {
       [x, y - 1],
       [x + 1, y - 1],
     ]
-      .filter((c) => c[0] >= 0 && c[1] >= 0 && c[0] < COLS && c[1] < ROWS)
-      .map((c) => this.toIdx(c[0], c[1]));
+      .filter((c) => c[0] >= 0 && c[1] >= 0 && c[0] < COLS && c[1] < ROWS) // Remove off board.
+      .map((c) => this.toIdx(c[0], c[1])); // Back to index format.
   }
 
   private updateCell(idx: number, visited: Set<number>) {
@@ -99,12 +99,12 @@ export class Game {
     const neighbours = this.getNeighbours(idx);
     const minelessNeighbours = neighbours.filter((i) => !this.mines[i]);
     const mineCount = neighbours.filter((i) => this.mines[i]).length;
+    this.cellValues[idx] = mineCount;
 
     // If there's no mines, recurse.
     if (mineCount === 0) {
       minelessNeighbours.filter((n) => !visited.has(n)).forEach((n) => this.updateCell(n, visited));
     }
-    this.cellValues[idx] = mineCount;
   }
 
   private handleClick(idx: number) {
