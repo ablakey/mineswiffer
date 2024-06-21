@@ -5,16 +5,7 @@ const COLS = 14;
 const MINE_COUNT = 30;
 const BOMB_ICON = "💣";
 
-const COLORS: Record<number, string> = {
-  1: "blue",
-  2: "green",
-  3: "red",
-  4: "darkblue",
-  5: "darkred",
-  6: "teal",
-  7: "black",
-  8: "grey",
-};
+const COLORS = ["blue", "green", "red", "darkblue", "darkred", "teal", "black", "grey"];
 
 export class Game {
   private cells: HTMLDivElement[] = [];
@@ -39,16 +30,13 @@ export class Game {
   private renderBoard() {
     this.cells.forEach((c, idx) => {
       const value = this.cellValues[idx];
-      const hasMine = this.mines[idx];
-
       if (value !== null) {
         c.classList.add("revealed");
-
-        if (hasMine) {
+        if (this.mines[idx]) {
           c.innerText = BOMB_ICON;
         } else if (value > 0) {
           c.innerText = value.toString();
-          c.style.color = COLORS[value];
+          c.style.color = COLORS[value - 1];
         }
       }
     });
@@ -78,7 +66,7 @@ export class Game {
     const mineCount = neighbours.filter((i) => this.mines[i]).length;
     this.cellValues[idx] = mineCount;
 
-    // If there's no mines, recurse.
+    // If there's no mines, recurse unvisited cells.
     if (mineCount === 0) {
       minelessNeighbours.filter((n) => !visited.has(n)).forEach((n) => this.updateCell(n, visited));
     }
