@@ -28,36 +28,18 @@ export class Game {
     container.style.gridTemplateColumns = `repeat(${COLS}, 1fr)`;
     this.cellValues = new Array(ROWS * COLS).fill(null);
 
-    for (let y = 0; y < ROWS; y++) {
-      for (let x = 0; x < COLS; x++) {
-        const cell = document.createElement("div");
-        cell.addEventListener("click", () => this.handleClick(this.toIdx(x, y)));
-        this.cells.push(cell);
-        container.appendChild(cell);
-      }
+    for (let idx = 0; idx < ROWS * COLS; idx++) {
+      const cell = document.createElement("div");
+      cell.addEventListener("click", () => this.handleClick(idx));
+      this.cells.push(cell);
+      container.appendChild(cell);
     }
-  }
-
-  private toIdx(x: number, y: number): number {
-    return y * COLS + x;
   }
 
   private toCoord(idx: number): [number, number] {
     const y = Math.floor(idx / COLS);
     const x = idx - y * COLS;
     return [x, y];
-  }
-
-  private generateMines(idx: number) {
-    let added = 0;
-    while (added < MINE_COUNT) {
-      const newMineIdx = Math.floor(Math.random() * COLS * ROWS);
-      // Don't spawn a mine on the first clicked cell.
-      if (newMineIdx !== idx) {
-        this.mines[newMineIdx] = true;
-        added++;
-      }
-    }
   }
 
   private renderBoard() {
@@ -91,7 +73,7 @@ export class Game {
       [x + 1, y - 1],
     ]
       .filter((c) => c[0] >= 0 && c[1] >= 0 && c[0] < COLS && c[1] < ROWS) // Remove off board.
-      .map((c) => this.toIdx(c[0], c[1])); // Back to index format.
+      .map((c) => c[1] * COLS + c[0]); // Back to index format.
   }
 
   private updateCell(idx: number, visited: Set<number>) {
@@ -115,7 +97,15 @@ export class Game {
 
     // Spawn mines.
     if (!this.mines.length) {
-      this.generateMines(idx);
+      let added = 0;
+      while (added < MINE_COUNT) {
+        const newMineIdx = Math.floor(Math.random() * COLS * ROWS);
+        // Don't spawn a mine on the first clicked cell.
+        if (newMineIdx !== idx) {
+          this.mines[newMineIdx] = true;
+          added++;
+        }
+      }
     }
 
     // Recursively update cell and neighbours. Track visited to prevent infinite recursion.
