@@ -1,5 +1,7 @@
+import { Game } from "./Game";
+
 function main() {
-  console.log("Hello!");
+  const game = new Game();
 }
 
 window.onload = main;
