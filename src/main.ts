@@ -36,12 +36,6 @@ export class Game {
     }
   }
 
-  private toCoord(idx: number): [number, number] {
-    const y = Math.floor(idx / COLS);
-    const x = idx - y * COLS;
-    return [x, y];
-  }
-
   private renderBoard() {
     this.cells.forEach((c, idx) => {
       const value = this.cellValues[idx];
@@ -61,7 +55,8 @@ export class Game {
   }
 
   private getNeighbours(idx: number): number[] {
-    const [x, y] = this.toCoord(idx);
+    const y = Math.floor(idx / COLS);
+    const x = idx - y * COLS;
     return [
       [x - 1, y],
       [x + 1, y],
